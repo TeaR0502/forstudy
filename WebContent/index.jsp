@@ -5,18 +5,31 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>请登录</title>
-<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
 <script type="text/javascript">
 	$(function () {
 		$("#but").click(function () {
-			//alert(1);
-			$.ajax(
-					{
-					url:
+			alert($("#username").val());
 
+			//
+			$.ajax({
+				url:"user_userLogin.html",
+				type:"post",//以post方式请求
+				data:{
+					"username":$("#username").val(),
+					"password":$("#password").val()
+					},//传参
+				dataType:"text",//服务器返回的数据类型
+				success:function(data){
+					
+					//alert(data);
+				},
+				error:function(e){
+					alert("错误"+e);
 				}
-				
-					)
+			});
+
+			//
 		});
 	});
 </script>

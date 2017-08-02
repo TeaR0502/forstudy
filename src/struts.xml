@@ -4,9 +4,10 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<package name="default" namespace="/" extends="struts-default">
-		<action name="user_login" class="">
-			
+		<action name="user_*" method="{1}" class="com.t.action.UserAction" >
+			<result name="success">/showcar.jsp</result>
+			<result name="fail">/index.jsp</result>
 		</action>
 	</package>
-
+	<constant name="struts.action.extension" value="html"></constant>
 </struts>
