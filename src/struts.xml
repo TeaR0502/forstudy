@@ -4,7 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<package name="default" namespace="/" extends="struts-default">
-		<action name="user_login">
+		<action name="user_login" class="">
 			
 		</action>
 	</package>
