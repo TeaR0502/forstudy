@@ -8,9 +8,10 @@
 <script type="text/javascript" src="js/jquery-2.1.0.js"></script>
 <script type="text/javascript">
 	$(function () {
+		
 		$("#but").click(function () {
-			alert($("#username").val());
-
+			//alert($("#username").val());
+			
 			//
 			$.ajax({
 				url:"user_userLogin.html",
@@ -21,8 +22,18 @@
 					},//传参
 				dataType:"text",//服务器返回的数据类型
 				success:function(data){
-					
 					//alert(data);
+					if (data == 1){
+						//alert("密码错误请重试!");
+						$("#result").html("密码错误请重试!");
+						$("#password").val("");
+						$("#username").val("");
+					} else{
+						//window.location.href="showcar.jsp";
+						//alert("登陆成功!欢迎访问<a herf='showcar.jsp'>车辆界面!</a>");
+						$("#result").html("登陆成功!欢迎访问<a href='showcar.jsp'>车辆界面!</a>");
+					}
+					
 				},
 				error:function(e){
 					alert("错误"+e);
@@ -51,7 +62,7 @@
 				<td><input type="button" id="but" value="登陆"></td>
 			</tr>
 		</table>
-		<h3></h3>
+		<h3 id="result">汽车管理!</h3>
 		
 	</div>
 </body>
