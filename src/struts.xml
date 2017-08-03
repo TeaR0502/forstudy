@@ -21,10 +21,20 @@
 		<action name="car_*" method="{1}" class="com.t.action.CarAction" >
 			
 		</action>
+		<action name="category_*" method="{1}" class="com.t.action.CategoryAction" >
+			
+		</action>
 		<action name="addcar" method="addcar" class="com.t.action.CarAction" >
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<interceptor-ref name="login"></interceptor-ref>
 			<result>/WEB-INF/page/addcar.jsp</result>
+			<result name="error">/error.html</result>
+			<result name="login">/index.jsp</result>
+		</action>
+		<action name="addcategory" method="getJsp" class="com.t.action.CategoryAction" >
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="login"></interceptor-ref>
+			<result>/WEB-INF/page/addCategory.jsp</result>
 			<result name="error">/error.html</result>
 			<result name="login">/index.jsp</result>
 		</action>

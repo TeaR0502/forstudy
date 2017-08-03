@@ -65,7 +65,7 @@ public class CarDAOimpl implements CarDAO {
 		} catch (Exception e) {
 			price = 0.0;
 		}
-		final String hql = "from Car where name like :name or price like :price or color like :color";
+		final String hql = "from Car where name like :name or price = :price or color like :color";
 		Query query = session.createQuery(hql);
 		info = "%"+info+"%";
 		query.setParameter("name", info);

@@ -13,6 +13,10 @@ import com.t.serviceimpl.CarServiceimpl;
 
 public class CarAction extends ActionSupport{
 	
+	/**
+	 * 模糊查询
+	 * @throws IOException
+	 */
 	public void vagueQuery() throws IOException {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -28,6 +32,11 @@ public class CarAction extends ActionSupport{
 		}
 	}
 	
+	/**
+	 * 查看车辆名称是否重复
+	 * @return
+	 * @throws IOException
+	 */
 	public String  checkCarName() throws IOException {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -43,6 +52,11 @@ public class CarAction extends ActionSupport{
 	}
 	
 	
+	/**
+	 * 添加车辆信息
+	 * @return
+	 * @throws IOException
+	 */
 	public String addCarInfo() throws IOException {
 		System.out.println("添加车辆信息!");
 		HttpServletRequest request = ServletActionContext.getRequest();
@@ -67,6 +81,10 @@ public class CarAction extends ActionSupport{
 		return null;
 	}
 	
+	/**
+	 * 拦截器判断添加车辆用户权限
+	 * @return
+	 */
 	public String  addcar() {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		if ("admin".equals(session.getAttribute("user"))) {
@@ -79,7 +97,11 @@ public class CarAction extends ActionSupport{
 	}
 	
 	
-	
+	/**
+	 * 获取所有车辆信息
+	 * @return
+	 * @throws IOException
+	 */
 	public String allCar() throws IOException {
 		System.out.println("调用ACTION");
 		

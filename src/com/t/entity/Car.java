@@ -5,6 +5,24 @@ public class Car {
 	private Double price;
 	private String name;
 	private String color;
+	private Category category;
+
+	public Car(long carId, Double price, String name, String color, Category category) {
+		super();
+		this.carId = carId;
+		this.price = price;
+		this.name = name;
+		this.color = color;
+		this.category = category;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
 
 	public long getCarId() {
 		return carId;
@@ -52,7 +70,8 @@ public class Car {
 
 	@Override
 	public String toString() {
-		return "Car [carId=" + carId + ", price=" + price + ", name=" + name + ", color=" + color + "]";
+		return "Car [carId=" + carId + ", price=" + price + ", name=" + name + ", color=" + color + ", category="
+				+ category + "]";
 	}
 
 }
