@@ -1,4 +1,4 @@
-package com.t.UserServiceimplTest;
+package com.t.ServiceimplTest;
 
 
 import org.junit.Test;

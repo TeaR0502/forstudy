@@ -18,7 +18,7 @@ public class UserAction extends ActionSupport{
 	private static final long serialVersionUID = -2021288157321726888L;
 
 	public String userLogin() throws IOException {
-		System.out.println("成功访问ACTION");
+		//System.out.println("成功访问ACTION");
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		String username = request.getParameter("username");

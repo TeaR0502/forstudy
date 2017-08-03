@@ -20,5 +20,6 @@
 		<!-- 获取本地事物 -->
 		<property name="hibernate.current_session_context_class">thread</property>
 		<mapping resource="com/t/entity/Users.hbm.xml"/>
+		<mapping resource="com/t/entity/Car.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>

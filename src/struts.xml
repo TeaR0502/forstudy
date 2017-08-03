@@ -8,6 +8,10 @@
 			<result name="success">/showcar.jsp</result>
 			<result name="fail">/index.jsp</result>
 		</action>
+		
+		<action name="car_*" method="{1}" class="com.t.action.CarAction" >
+			
+		</action>
 	</package>
 	<constant name="struts.action.extension" value="html"></constant>
 </struts>
