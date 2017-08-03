@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class UserFilter implements Filter{
+public class UserFilter2 implements Filter{
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -23,9 +23,9 @@ public class UserFilter implements Filter{
 		System.out.println(username);
 		if (username == null || "".equals(username)) {
 			System.out.println("未登录");
-			((HttpServletResponse) response).sendRedirect("index.jsp");
-		}  else {
 			chain.doFilter(request, response);
+		}  else {
+			((HttpServletResponse) response).sendRedirect("showcar.jsp");
 		}
 		
 	}

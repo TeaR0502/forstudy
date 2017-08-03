@@ -14,7 +14,7 @@
 			
 			//
 			$.ajax({
-				url:"user_userLogin.html",
+				url:"userLogin.html",
 				type:"post",//以post方式请求
 				data:{
 					"username":$("#username").val(),

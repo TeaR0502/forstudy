@@ -4,13 +4,29 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<package name="default" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="login" class="com.t.interception.AuthInterception"></interceptor>
+		</interceptors>
+	
 		<action name="user_*" method="{1}" class="com.t.action.UserAction" >
+			<result name="success">/showcar.jsp</result>
+			<result name="fail">/index.jsp</result>
+		</action>
+		<action name="userLogin" method="userLogin" class="com.t.action.UserAction" >
+			<!-- <interceptor-ref name="login"></interceptor-ref>  -->
 			<result name="success">/showcar.jsp</result>
 			<result name="fail">/index.jsp</result>
 		</action>
 		
 		<action name="car_*" method="{1}" class="com.t.action.CarAction" >
 			
+		</action>
+		<action name="addcar" method="addcar" class="com.t.action.CarAction" >
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<interceptor-ref name="login"></interceptor-ref>
+			<result>/WEB-INF/page/addcar.jsp</result>
+			<result name="error">/error.html</result>
+			<result name="login">/index.jsp</result>
 		</action>
 	</package>
 	<constant name="struts.action.extension" value="html"></constant>

@@ -16,8 +16,8 @@ public class UserDAOimplTest {
 	public void testAddUser() {
 		Users users = new Users();
 		users.setPassword("123456");
-		users.setStatus(1);
-		users.setUsername("T");
+		users.setStatus(0);
+		users.setUsername("admin");
 		UserDAOimpl.getNew().addUser(users);
 	}
 	

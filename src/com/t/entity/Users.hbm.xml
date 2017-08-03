@@ -6,7 +6,7 @@
     <class name="com.t.entity.Users" table="USERS">
         <id name="id" type="int">
             <column name="ID" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="username" type="java.lang.String">
             <column name="USERNAME" />

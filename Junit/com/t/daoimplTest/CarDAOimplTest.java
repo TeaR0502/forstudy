@@ -10,8 +10,22 @@ import com.t.entity.Car;
 
 public class CarDAOimplTest {
 
-
-
+	@Test
+	public void testVagueQuery() {
+		List<Car> car = CarDAOimpl.getNew().vagueQuery("红");
+		for (Car car2 : car) {
+			System.out.println(car2);
+		}
+		
+	}
+	
+	@Test
+	public void testQueryCarByName() {
+		Car car = CarDAOimpl.getNew().queryCarByName("宝123马");
+		System.out.println(car);
+	}
+	
+	
 	@Test
 	public void testQueryAll() {
 		List<Car> cars = CarDAOimpl.getNew().queryAll();

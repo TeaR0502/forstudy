@@ -27,4 +27,41 @@ public class CarServiceimpl implements CarService{
 		return JSON.toJSONString(cars);
 	}
 
+
+
+	@Override
+	public boolean checkName(String name) {
+		if (CarDAOimpl.getNew().queryCarByName(name) == null) {
+			return true;
+		} else {
+			return false;
+		}
+		
+	}
+
+
+
+	@Override
+	public boolean addCar(String name, Double price, String color) {
+		try {
+			Car car = new Car();
+			car.setColor(color);;
+			car.setName(name);
+			car.setPrice(price);
+			CarDAOimpl.getNew().addCar(car);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		
+	}
+
+
+
+	@Override
+	public String vagueQuery(String info) {
+		List<Car> cars = CarDAOimpl.getNew().vagueQuery(info);
+		return JSON.toJSONString(cars);
+	}
+
 }

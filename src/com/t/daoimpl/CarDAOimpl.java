@@ -45,6 +45,36 @@ public class CarDAOimpl implements CarDAO {
 		session.beginTransaction().commit();
 	}
 
+	@Override
+	public Car queryCarByName(String name) {
+		final String hql = "from Car where name = :name";
+		Query query = session.createQuery(hql);
+		query.setParameter("name", name);
+		Car car = null;
+		if (query.list() != null && query.list().size() != 0) {
+			car = (Car) query.list().get(0);
+		}
+		return car;
+	}
+
+	@Override
+	public List<Car> vagueQuery(String info) {
+		Double price;
+		try {
+			price = Double.parseDouble(info);
+		} catch (Exception e) {
+			price = 0.0;
+		}
+		final String hql = "from Car where name like :name or price like :price or color like :color";
+		Query query = session.createQuery(hql);
+		info = "%"+info+"%";
+		query.setParameter("name", info);
+		
+		query.setParameter("price", price);
+		query.setParameter("color", info);
+		return query.list();
+	}
+
 
 
 
