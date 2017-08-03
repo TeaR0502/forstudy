@@ -70,8 +70,9 @@ public class CarAction extends ActionSupport{
 		}
 		
 		String color = request.getParameter("color");
+		String category = request.getParameter("category");
 		
-		if (CarServiceimpl.getNew().addCar(name, price, color)) {
+		if (CarServiceimpl.getNew().addCar(name, price, color,category)) {
 			System.out.println("成功");
 			response.getWriter().write("0");//成功
 		} else {

@@ -6,7 +6,7 @@
     <class name="com.t.entity.Car" table="CAR">
         <id name="carId" type="long">
             <column name="CARID" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="price" type="java.lang.Double">
             <column name="PRICE" />

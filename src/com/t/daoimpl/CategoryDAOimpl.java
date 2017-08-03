@@ -63,4 +63,15 @@ public class CategoryDAOimpl implements CategoryDAO{
 		return (Category) query.uniqueResult();
 	}
 
+
+
+	@Override
+	public List<Category> queryAllChildId(String parentCategory) {
+		final String hql = "from Category where parentCatepory = :parentCatepory";
+		Category category = CategoryDAOimpl.getNew().queryCategoryByName(parentCategory);
+		Query query = session.createQuery(hql);
+		query.setParameter("parentCatepory", category);
+		return query.list();
+	}
+
 }

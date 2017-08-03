@@ -23,7 +23,7 @@
 						//alert("获取成功");
 						var temp = "<tr>"+
 						"<td>车辆编号</td>"
-						+"<td>车辆品牌</td>"
+						+"<td>车辆名称</td>"
 						+"<td>车辆价格</td>"
 						+"<td>车辆颜色</td>" +"</tr>";
 							for (var i = 0;i < data.length;i++){

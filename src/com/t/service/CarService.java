@@ -20,7 +20,7 @@ public interface CarService {
 	 * @param color
 	 * @return
 	 */
-	boolean addCar(String name,Double price,String color);
+	boolean addCar(String name,Double price,String color,String category);
 	/**
 	 * 检验车辆的名称
 	 * @return

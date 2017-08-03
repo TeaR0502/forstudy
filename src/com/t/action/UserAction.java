@@ -12,18 +12,26 @@ import com.t.serviceimpl.UserServiceimpl;
 
 public class UserAction extends ActionSupport {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -2021288157321726888L;
 
+	/**
+	 * 退出方法
+	 * @throws IOException
+	 */
 	public void exit() throws IOException {
 		ServletActionContext.getRequest().getSession().invalidate();
 		ServletActionContext.getResponse().sendRedirect("index.jsp");
 	}
 
+	
+	/**
+	 * 用户登录判断
+	 * @return
+	 * @throws IOException
+	 */
 	public String userLogin() throws IOException {
-		// System.out.println("成功访问ACTION");
+		System.out.println("成功访问ACTION");
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		String username = request.getParameter("username");

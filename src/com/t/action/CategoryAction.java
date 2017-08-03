@@ -22,14 +22,40 @@ public class CategoryAction extends ActionSupport {
 
 	
 	
-	public void addCategporyInfo() {
+	
+	/**
+	 * 添加品牌信息
+	 * @throws IOException
+	 */
+	public void addCategporyInfo() throws IOException {
+		System.out.println("调用addCategoryInfo");
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		String name = request.getParameter("name");
 		String parentCategory = request.getParameter("parentCategory");
-		
-		
+		if (CategoryServiceimpl.getNew().addCategory(name, parentCategory)) {
+			response.getWriter().write("0");//成功
+		} else {
+			response.getWriter().write("1");//存在同名类
+		}
 	}
+	
+	/**
+	 * 查询父类下子类品牌
+	 * @throws IOException 
+	 */
+	public void queryAllChild() throws IOException {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		String parentCategory = request.getParameter("parentCategory");
+		String categoryListJson = CategoryServiceimpl.getNew().queryAllChild(parentCategory);
+		if (categoryListJson != null && categoryListJson.length() != 0) {
+			response.getWriter().write(categoryListJson);
+		} else {
+			response.getWriter().write("");
+		}	
+	}
+	
 	/**
 	 * 查询所有的父类品牌
 	 * @return
@@ -53,6 +79,7 @@ public class CategoryAction extends ActionSupport {
 	 * @return
 	 */
 	public String  getJsp() {
+		System.out.println("调用成功");
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		if ("admin".equals(session.getAttribute("user"))) {
 			return SUCCESS;

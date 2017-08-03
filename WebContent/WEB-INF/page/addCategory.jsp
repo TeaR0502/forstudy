@@ -9,14 +9,16 @@
 <script type="text/javascript">
 	$(function() {
 		$("#result").hide(0);
-		
+
 		//alert($("#but").val());
+		
+		//点击按钮绑定事件
 		$("#but").click(function () {
 			//alert($("#parentCategory").val());
 			if ($("#name").val() != ""){
-				alert(1);
+				//alert(1);
 				$.ajax({
-					url:"",
+					url:"category_addCategporyInfo.html",
 					type:"post",
 					data:{
 					"name":$("#name").val(),
@@ -24,12 +26,12 @@
 					},
 					dataType:"text",
 					success:function (data){
-						alert(data);
+						//alert(data);
 						if (data == 0){
 							$("#result").html("添加成功,返回查看");
 							$("#result").show(2000);
 						} else if (data == 1){
-							$("#result").html("添加失败,请稍后重试!");
+							$("#result").html("添加失败,该品牌已存在!");
 							$("#result").show(2000);
 							$("#result").hide(4000);
 						}
@@ -37,18 +39,13 @@
 				});
 				//
 			} else {
-				$("#result").html("车辆名称为空!")
+				$("#result").html("名称为空!")
 			}
 			//
-			
-		
-		
-		
 		});
 		
 		
-		
-			
+			//获取所有父类品牌
 			//
 			$.ajax({
 				url:"category_queryAllParent.html",
@@ -71,7 +68,7 @@
 	
 	});
 </script>
-<title>车辆添加!</title>
+<title>添加品牌!</title>
 </head>
 <body>
 	<div align="center">

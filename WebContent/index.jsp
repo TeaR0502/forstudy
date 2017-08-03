@@ -36,7 +36,7 @@
 					
 				},
 				error:function(e){
-					alert("错误"+e);
+					alert("错误");
 				}
 			});
 

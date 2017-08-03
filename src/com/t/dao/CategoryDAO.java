@@ -6,6 +6,11 @@ import com.t.entity.Category;
 
 public interface CategoryDAO {
 	/**
+	 * 根据父类查询所有子类
+	 * @return
+	 */
+	List<Category> queryAllChildId(String parentCategory);
+	/**
 	 * 根据名称查询该品牌
 	 * @return
 	 */

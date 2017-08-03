@@ -14,6 +14,14 @@ import com.t.jdbc.JdbcUtils;
 public class CategoryDAOimpltTest {
 	Session session=JdbcUtils.openSession();
 
+	
+	@Test
+	public void testQueryAllChildId() {
+		List< Category> categories = CategoryDAOimpl.getNew().queryAllChildId("宝马");
+		for (Category category2 : categories) {
+			System.out.println(category2);
+		}
+	}
 	@Test
 	public void testQueryCategoryByName() {
 		System.out.println(CategoryDAOimpl.getNew().queryCategoryByName("宝马"));
