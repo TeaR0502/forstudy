@@ -1,42 +1,41 @@
 package com.t.serviceimpl;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.alibaba.fastjson.JSON;
+import com.t.dao.CategoryDAO;
 import com.t.daoimpl.CategoryDAOimpl;
 import com.t.entity.Category;
 import com.t.service.CategoryService;
 
+@Service
 public class CategoryServiceimpl implements CategoryService{
 
-	private static CategoryServiceimpl categoryServiceimpl;
+	@Autowired
+	private CategoryDAO categoryDAO;
 	
-	static {
-		categoryServiceimpl = new CategoryServiceimpl();
-	}
 	
-	public static  CategoryServiceimpl getNew() {
-		return categoryServiceimpl;
-	}
-
 	@Override
 	public String queryAllParent() {
 		
-		return JSON.toJSONString(CategoryDAOimpl.getNew().queryAllParentId());
+		return JSON.toJSONString(categoryDAO.queryAllParentId());
 	}
 
 	@Override
 	public boolean addCategory(String name, String parentCategory) {
-		if (CategoryDAOimpl.getNew().queryCategoryByName(name) != null) {
+		if (categoryDAO.queryCategoryByName(name) != null) {
 			return false;
 		} else {
 			Category category = null;
 			if (parentCategory != null || !parentCategory.equals("根目录")) {
-				category = CategoryDAOimpl.getNew().queryCategoryByName(parentCategory);
+				category = categoryDAO.queryCategoryByName(parentCategory);
 			}
 			Category newCategory = new Category();
 			newCategory.setName(name);
 			newCategory.setParentCatepory(category);
-			CategoryDAOimpl.getNew().addCategory(newCategory);
+			categoryDAO.addCategory(newCategory);
 			return true;
 		}
 		
@@ -46,7 +45,7 @@ public class CategoryServiceimpl implements CategoryService{
 
 	@Override
 	public String queryAllChild(String parentCatepory) {
-		return JSON.toJSONString(CategoryDAOimpl.getNew().queryAllChildId(parentCatepory));
+		return JSON.toJSONString(categoryDAO.queryAllChildId(parentCatepory));
 	}
 	
 	

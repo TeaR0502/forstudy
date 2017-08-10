@@ -4,34 +4,26 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.t.dao.CarDAO;
 import com.t.dao.UserDAO;
 import com.t.entity.Car;
 import com.t.entity.Users;
-import com.t.jdbc.JdbcUtils;
 
+@Repository
 public class CarDAOimpl implements CarDAO {
 	
-	private static Session session;
-	private static CarDAOimpl carDAOimpl ;
-	
-
-	
-	static {
-		session = JdbcUtils.openSession();
-		carDAOimpl = new CarDAOimpl();
-	}
-	
-	/**
-	 * 单例模式
-	 * @return
-	 */
-	public static CarDAOimpl getNew() {
-		return carDAOimpl;
+	private Session session;
+	@Autowired
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		session = sessionFactory.openSession();
 	}
 
+	
 	@Override
 	public List<Car> queryAll() {
 		final String hql = "from Car";

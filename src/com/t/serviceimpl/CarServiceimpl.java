@@ -2,30 +2,29 @@ package com.t.serviceimpl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.alibaba.fastjson.JSON;
-import com.t.daoimpl.CarDAOimpl;
-import com.t.daoimpl.CategoryDAOimpl;
+import com.t.dao.CarDAO;
+import com.t.dao.CategoryDAO;
 import com.t.entity.Car;
 import com.t.entity.Category;
 import com.t.service.CarService;
 
+@Service
 public class CarServiceimpl implements CarService{
 
-	private static CarServiceimpl carServiceimpl;
-	
-	static {
-		carServiceimpl = new CarServiceimpl();
-	}
-	
-	public static  CarServiceimpl getNew() {
-		return carServiceimpl;
-	}
+	@Autowired
+	private  CategoryDAO categoryDAO;
+	@Autowired
+	private  CarDAO carDAO ;
 	
 	
 	
 	@Override
 	public String allCar() {
-		List<Car> cars = CarDAOimpl.getNew().queryAll();
+		List<Car> cars = carDAO.queryAll();
 		return JSON.toJSONString(cars);
 	}
 
@@ -33,7 +32,7 @@ public class CarServiceimpl implements CarService{
 
 	@Override
 	public boolean checkName(String name) {
-		if (CarDAOimpl.getNew().queryCarByName(name) == null) {
+		if (carDAO.queryCarByName(name) == null) {
 			return true;
 		} else {
 			return false;
@@ -50,9 +49,9 @@ public class CarServiceimpl implements CarService{
 			car.setColor(color);;
 			car.setName(name);
 			car.setPrice(price);
-			Category category1 = CategoryDAOimpl.getNew().queryCategoryByName(category);
+			Category category1 = categoryDAO.queryCategoryByName(category);
 			car.setCategory(category1);
-			CarDAOimpl.getNew().addCar(car);
+			carDAO.addCar(car);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -64,7 +63,7 @@ public class CarServiceimpl implements CarService{
 
 	@Override
 	public String vagueQuery(String info) {
-		List<Car> cars = CarDAOimpl.getNew().vagueQuery(info);
+		List<Car> cars = carDAO.vagueQuery(info);
 		return JSON.toJSONString(cars);
 	}
 

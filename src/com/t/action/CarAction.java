@@ -2,16 +2,24 @@ package com.t.action;
 
 import java.io.IOException;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.t.serviceimpl.CarServiceimpl;
+import com.t.service.CarService;
 
+@Controller
 public class CarAction extends ActionSupport{
+	
+	@Autowired
+	private CarService carService;
+	
 	
 	/**
 	 * 模糊查询
@@ -23,7 +31,7 @@ public class CarAction extends ActionSupport{
 		response.setCharacterEncoding("utf-8");
 		String info = request.getParameter("info");
 		
-		String carListJson = CarServiceimpl.getNew().vagueQuery(info);
+		String carListJson = carService.vagueQuery(info);
 		//System.out.println(carListJson);
 		if (carListJson != null && carListJson.length() != 0) {
 			response.getWriter().write(carListJson);
@@ -41,7 +49,7 @@ public class CarAction extends ActionSupport{
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		String name = request.getParameter("name");
-		if (CarServiceimpl.getNew().checkName(name)) {
+		if (carService.checkName(name)) {
 			//System.out.println("可以使用");
 			response.getWriter().write("0");//可以使用没有重复
 		} else {
@@ -72,7 +80,7 @@ public class CarAction extends ActionSupport{
 		String color = request.getParameter("color");
 		String category = request.getParameter("category");
 		
-		if (CarServiceimpl.getNew().addCar(name, price, color,category)) {
+		if (carService.addCar(name, price, color,category)) {
 			System.out.println("成功");
 			response.getWriter().write("0");//成功
 		} else {
@@ -108,7 +116,7 @@ public class CarAction extends ActionSupport{
 		
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setCharacterEncoding("utf-8");
-		String carListJson = CarServiceimpl.getNew().allCar();
+		String carListJson = carService.allCar();
 		//System.out.println(carListJson);
 		if (carListJson != null && carListJson.length() != 0) {
 			response.getWriter().write(carListJson);

@@ -4,32 +4,23 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 
 import com.sun.xml.internal.messaging.saaj.soap.StringDataContentHandler;
 import com.t.dao.CategoryDAO;
 import com.t.entity.Category;
-import com.t.jdbc.JdbcUtils;
 
+@Repository
 public class CategoryDAOimpl implements CategoryDAO{
 
-	private static Session session;
-	private static CategoryDAOimpl categoryDAOimpl ;
-	
-
-	
-	static {
-		session = JdbcUtils.openSession();
-		categoryDAOimpl = new CategoryDAOimpl();
+	private Session session;
+	@Autowired
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		session = sessionFactory.openSession();
 	}
-	
-	/**
-	 * 单例模式
-	 * @return
-	 */
-	public static CategoryDAOimpl getNew() {
-		return categoryDAOimpl;
-	}
-
 	
 	
 	@Override
@@ -68,7 +59,7 @@ public class CategoryDAOimpl implements CategoryDAO{
 	@Override
 	public List<Category> queryAllChildId(String parentCategory) {
 		final String hql = "from Category where parentCatepory = :parentCatepory";
-		Category category = CategoryDAOimpl.getNew().queryCategoryByName(parentCategory);
+		Category category = queryCategoryByName(parentCategory);
 		Query query = session.createQuery(hql);
 		query.setParameter("parentCatepory", category);
 		return query.list();

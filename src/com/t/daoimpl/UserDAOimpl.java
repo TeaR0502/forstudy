@@ -2,34 +2,22 @@ package com.t.daoimpl;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.t.dao.UserDAO;
 import com.t.entity.Users;
-import com.t.jdbc.JdbcUtils;
 
+@Repository
 public class UserDAOimpl implements UserDAO {
 	
-	private static Session session;
-	private static UserDAOimpl userDAOimpl ;
-	
-
-	
-	static {
-		session = JdbcUtils.openSession();
-		userDAOimpl = new UserDAOimpl();
+	private Session session;
+	@Autowired
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		session = sessionFactory.openSession();
 	}
-	
-	/**
-	 * 单例模式
-	 * @return
-	 */
-	public static UserDAOimpl getNew() {
-		return userDAOimpl;
-	}
-
-
-
 
 
 	@Override

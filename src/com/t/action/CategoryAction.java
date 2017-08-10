@@ -7,14 +7,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.t.service.CategoryService;
 import com.t.serviceimpl.CarServiceimpl;
 import com.t.serviceimpl.CategoryServiceimpl;
-
+@Controller
 public class CategoryAction extends ActionSupport {
 
+	@Autowired
+	private  CategoryService categoryService;
 	/**
 	 * 
 	 */
@@ -33,7 +37,7 @@ public class CategoryAction extends ActionSupport {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		String name = request.getParameter("name");
 		String parentCategory = request.getParameter("parentCategory");
-		if (CategoryServiceimpl.getNew().addCategory(name, parentCategory)) {
+		if (categoryService.addCategory(name, parentCategory)) {
 			response.getWriter().write("0");//成功
 		} else {
 			response.getWriter().write("1");//存在同名类
@@ -48,7 +52,7 @@ public class CategoryAction extends ActionSupport {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		String parentCategory = request.getParameter("parentCategory");
-		String categoryListJson = CategoryServiceimpl.getNew().queryAllChild(parentCategory);
+		String categoryListJson = categoryService.queryAllChild(parentCategory);
 		if (categoryListJson != null && categoryListJson.length() != 0) {
 			response.getWriter().write(categoryListJson);
 		} else {
@@ -64,7 +68,7 @@ public class CategoryAction extends ActionSupport {
 	public String queryAllParent() throws IOException {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setCharacterEncoding("utf-8");
-		String categoryListJson = CategoryServiceimpl.getNew().queryAllParent();
+		String categoryListJson = categoryService.queryAllParent();
 		//System.out.println(carListJson);
 		if (categoryListJson != null && categoryListJson.length() != 0) {
 			response.getWriter().write(categoryListJson);
